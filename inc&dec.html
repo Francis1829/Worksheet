@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>INC&DEC</title>
+</head>
+<style>
+
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card{
+        height: 400px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0px 10px 18px 2px #868686;
+        border-radius: 16px ;
+    }
+
+    .state{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text-identifier{
+        margin-top: 20px;
+        font-size: 25px;
+        height: 30px;
+    }
+
+    .count{
+        font-size: 20px;
+        height: 30px;
+        text-align: center;
+    }
+
+    .Buts{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 50%;
+    }
+
+    #plus, #reset, #minus{
+        padding: 8px 0;
+        background: #1f1f1f;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        box-shadow: 0px 5px 5px 0px #358f39;
+    }
+
+
+</style>
+<body class="h-screen w-full flex justify-center items-center">
+    
+    <div class="card">
+    <div class="state w-full flex flex-col justify-center text-center items-center">
+        <label id="count" class="count">0</label>
+        <label id="identifier" class="text-identifier"> </label>
+    </div>
+
+    <div class="Buts flex justify-around w-full text-white">
+        <button id="plus" class="px-4 bg-black/70 rounded-full">+</button>
+        <button id="reset" class="px-4 bg-black/90 rounded-full text-lg font-bold">RESET</button>
+        <button id="minus" class="px-4 bg-black/70 rounded-full">-</button>
+    </div>
+</div>
+
+</body>
+
+<script>
+    let num = 0;
+
+
+    document.getElementById("plus").onclick = function(){
+    num += 1;
+    jsevenodd();
+    }
+
+document.getElementById("minus").onclick = function(){
+    num -= 1;
+    jsevenodd();
+}
+
+document.getElementById("reset").onclick = function(){
+    jsinblaank( );
+    num = 0;
+    document.getElementById("count").innerHTML = num    ;
+}
+
+function jsinblaank(){
+    document.getElementById("identifier").innerHTML = "";
+}
+
+function jsevenodd() {
+        document.getElementById("count").innerHTML = num;
+        if (num % 2 === 0) {
+            document.getElementById("identifier").innerHTML = "Even";
+        } else {
+            document.getElementById("identifier").innerHTML = "Odd";
+        }
+    }
+
+
+</script>
+</html>

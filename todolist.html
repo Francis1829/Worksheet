@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todolist</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display:flex ;
+        justify-content: center;
+        background-color: rgba(0, 30, 164, 0.659) ;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .card{
+        margin: 20px 0; 
+        width: 400px;
+        height: 300px auto;
+        display: flex;
+        background: #ffffff;
+        border-radius: 6px;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: rgba(60, 60, 60, 0.674) 0px 15px 20px;
+    }   
+    .todolist{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        border-radius: 90px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .listinput{
+        background: #edeef0;
+        outline: none;
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+    }
+
+    button{
+        position: absolute;
+        top: 0;
+        right: -1px;
+        width: 100px;
+        font-size: 12px;
+        height: 100%;
+        border-radius: 100px;
+        border: none;
+        background: black;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover{
+        background: #bab9b9;
+        color: #000;
+        transition: all ease-in-out .3s;
+    }
+
+    .checkbox{
+        width: 15px;
+        height: 15px;
+    }
+    ul{
+        padding: 0;
+        width: 80%;
+        
+    }
+
+    ul li{
+        list-style: none;
+        padding: 12px 8px 0px 40px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        text-transform: capitalize;
+        position: relative;
+    }
+
+    ul li.checked{
+        color: #444444;
+        text-decoration: line-through;
+    }
+
+    .cardtasklist{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+    }
+
+    ul li span{
+        position: absolute;
+        right: 0;
+        top: 9px;
+        width: 40px;
+        height: inherit;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius: 100px;
+        text-align: center;
+    }
+
+    ul li span:hover{
+        background: #edeef0;
+        color: rgb(162, 7, 7);
+    }
+</style>
+<body>
+    
+    <div class="card">
+        <h1>Todo List</h1>
+        <div class="todolist">
+            <input type="text" id="taskinput" class="listinput" placeholder="Add your task here">
+            <button class="add" id="add" onclick=Addtask()>Add</button>
+        </div>
+        <div class="cardtasklist">
+        <ul id="tasklist">
+            <!-- <li class="checked">Task 1</li> -->
+            <div id="buttons">
+
+            </div>
+            
+        </ul>
+    </div>
+    </div>
+
+    <script>
+        const InputTask = document.getElementById("taskinput");
+        const TaskList = document.getElementById("tasklist");
+
+        function Addtask() {
+            if(InputTask.value === '') {
+                alert("You must write something!");
+            }
+            else{
+                let li = document.createElement("li");
+                li.class = "checked";
+                li.innerHTML = InputTask.value;
+                TaskList.appendChild(li);
+                let span = document.createElement("span");
+                span.innerHTML = '\u00d7';
+                li.appendChild(span);
+            }
+            InputTask.value = "";
+            saveAll();
+        }
+
+        TaskList.addEventListener("click", function(e){
+            if(e.target.tagName === "LI"){
+                e.target.classList.toggle("checked");
+                saveAll()
+            }else if(e.target.tagName === "SPAN"){
+                e.target.parentElement.remove();
+                saveAll()
+            }
+        },false)
+
+
+        function saveAll() {
+            localStorage.setItem("Data", TaskList.innerHTML);
+        }
+        function showAll() {
+            TaskList.innerHTML = localStorage.getItem("Data")
+        }
+        showAll()
+    </script>
+</body>
+</html>
